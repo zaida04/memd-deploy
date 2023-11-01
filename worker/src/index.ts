@@ -12,6 +12,12 @@ app.all('/', (c) => {
 });
 
 app.post('/deploy', async (c) => {
+  const body = await c.req.json<{ secret: string }>();
+  if (body.secret !== c.env.SECRET) {
+    c.status(401);
+    return c.json({ error: "Unauthorized" });
+  }
+
   const requiredEnvs = [
     "GITHUB_TOKEN",
     "GITHUB_OWNER",

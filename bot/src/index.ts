@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { Client } from "discord.js";
-import { DEPLOY_URL } from "./env";
+import { DEPLOY_SECRET, DEPLOY_URL } from "./env";
 const client = new Client({ intents: ["Guilds", "GuildMessages", "MessageContent"] });
 const WHITELISTED_IDS = ["500765481788112916", "328723945266348033"];
 
@@ -16,7 +16,8 @@ client.on("messageCreate", async (message) => {
     }
 
     const request = await fetch(DEPLOY_URL, {
-        method: "POST"
+        method: "POST",
+        body: JSON.stringify({ secret: DEPLOY_SECRET })
     });
 
     if (request.ok) {
