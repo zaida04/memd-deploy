@@ -23,7 +23,8 @@ client.on("messageCreate", async (message) => {
     if (request.ok) {
         message.reply("Deploying!");
     } else {
-        message.reply("Something went wrong.");
+        message.reply("Something went wrong. " + await request.text());
+        return;
     }
 
     setTimeout(async () => {
