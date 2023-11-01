@@ -33,13 +33,13 @@ client.on("messageCreate", async (message) => {
             message.reply("Frontend is down!");
         }
 
-        const backendTest = await fetch("https://tracing.cse.buffalo.edu/api");
+        const backendTest = await fetch("https://tracing.cse.buffalo.edu/api/");
         if (backendTest.ok) {
             message.reply("Backend is up!");
         } else {
             message.reply("Backend is down!");
         }
-    });
+    }, 45_000);
 });
 
 client.login(process.env.DISCORD_TOKEN);
